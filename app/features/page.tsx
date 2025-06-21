@@ -1,5 +1,6 @@
 import Button from '@/components/Button/Button'
 import CardSlider from '@/components/CardSlider/CardSlider'
+import DesignDisplay from '@/components/DesignDisplay/DesignDisplay'
 import Menu from '@/components/Navbar/Menu'
 import PageTitle from '@/components/PageTitle/PageTitle'
 import CenterTextBlock from '@/components/TextSections/CenterTextSection'
@@ -159,6 +160,7 @@ const Features = async () => {
             med hur du väljer att individanpassa sidan alltid att se unik ut.
           </Typography>
         </div>
+        <DesignDisplay />
       </section>
     </>
   )

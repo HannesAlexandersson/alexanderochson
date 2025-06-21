@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Template } from './DesignDisplay.interfaces'
 import TemplateDisplayCards from './deps/DesignCard'
 
@@ -16,6 +16,25 @@ const DesignDisplay = () => {
   const handleEdit = (slug: string) => {
     router.push(`/templates/${slug}`)
   }
+
+  useEffect(() => {
+    const fetchTemplates = async () => {
+      try {
+        setLoading(true)
+        const response = await fetch('/api/templates')
+        if (!response.ok) {
+          throw new Error('Failed to fetch templates')
+        }
+        const data = await response.json()
+        setTemplates(data.templates || [])
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred')
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchTemplates()
+  }, [])
 
   return (
     <TemplateDisplayCards
