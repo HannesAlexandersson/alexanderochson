@@ -72,6 +72,7 @@ const About = async () => {
           {aboutTextMapping &&
             aboutTextMapping.map(block => (
               <TextBlock.Section
+                id={block.order === 2 ? 'team' : ''}
                 key={block.order}
                 className={'my-16 md:my-32'}
                 reverse={block.order % 2 === 0 ? true : false}

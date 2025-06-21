@@ -1,5 +1,7 @@
 'use client'
 import Typography from '@/components/Typography/Typography'
+import { footerCustomData } from '@/lib/footerCustomData'
+import locations from '@/lib/locations'
 import { cn } from '@/utils/utils'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
@@ -11,7 +13,6 @@ import {
   SectionProps,
   SectionTitleProps,
   SocialMediaSection,
-  TextSection,
 } from './Footer.types'
 
 const FooterModel = dynamic(() => import('@/components/Model/ModelCanvas'), {
@@ -60,25 +61,61 @@ const Footer = ({ footerData, ...props }: FooterProps) => {
       <div className='py-12 pl-12 md:px-8 lg:px-10'>
         <div className='relative mx-auto flex max-w-[1200px] flex-col justify-between gap-4 overflow-hidden md:flex-row md:items-start md:gap-0 md:overflow-visible'>
           {/* columns */}
-          {footerData.sections.map((section: TextSection, index: number) => (
+          {locations.map((location, index) => (
+            <Section key={index} className='md:w-1/3'>
+              <Section.Title className='text-primaryText font-poppins underline sm:mt-2'>
+                Du hittar oss här
+              </Section.Title>
+              <Section.Content>
+                <Typography
+                  size='sm'
+                  className='text-secondaryText font-inria-sherif text-lg'
+                >
+                  {location.address}
+                </Typography>
+                <Typography
+                  size='sm'
+                  className='text-secondaryText font-inria-sherif text-lg'
+                >
+                  {location.postnummer}, {location.city}
+                </Typography>
+                <Typography
+                  size='sm'
+                  className='text-secondaryText font-inria-sherif text-lg'
+                >
+                  {location.country}
+                </Typography>
+                <Link
+                  href={location.mapLink}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-secondaryText font-inria-sherif text-lg transition-colors hover:text-slate-900 hover:underline'
+                >
+                  Visa på karta
+                </Link>
+              </Section.Content>
+            </Section>
+          ))}
+
+          {/* Custom sections */}
+          {footerCustomData.sections.map((section, index) => (
             <Section key={index}>
               <Section.Title className='text-primaryText font-poppins underline sm:mt-2'>
                 {section.sectionTitle}
               </Section.Title>
               <Section.Content>
-                {section.linkTexts.map((linkText, linkIndex) => (
-                  <Link
-                    key={linkIndex}
-                    href={`/${linkText.toLowerCase().replace(/\s+/g, '-')}`}
-                  >
-                    <Typography
-                      size='sm'
-                      className='text-secondaryText font-inria-sherif text-lg transition-colors hover:text-slate-900 hover:underline'
-                    >
-                      {linkText}
-                    </Typography>
-                  </Link>
-                ))}
+                {Object.entries(section.linkTexts).map(
+                  ([linkText, href], linkIndex) => (
+                    <Link key={linkIndex} href={href}>
+                      <Typography
+                        size='sm'
+                        className='text-secondaryText font-inria-sherif text-lg transition-colors hover:text-slate-900 hover:underline'
+                      >
+                        {linkText}
+                      </Typography>
+                    </Link>
+                  ),
+                )}
               </Section.Content>
             </Section>
           ))}
