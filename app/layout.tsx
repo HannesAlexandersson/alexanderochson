@@ -51,6 +51,10 @@ export async function generateMetadata(): Promise<Metadata> {
       default: 'Minimalistic Elegance',
     },
     description: `Created by Alexander&son for ${metaCustomer}`,
+    icons: {
+      icon: '/favicon.ico',
+      apple: '/apple-icon.png',
+    },
     keywords: customerKeyWords,
     metadataBase: new URL(metadataBase),
     authors: [{ name: 'Alexander&son' }],

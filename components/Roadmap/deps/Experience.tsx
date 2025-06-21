@@ -69,14 +69,6 @@ const ExperienceCard: React.FC<Experience> = ({
 )
 
 const Experience = ({ bullets }: { bullets: BulletProps[] }) => {
-  /* const experiences = bullets.map(bullet => ({
-    title: bullet.title,
-    company_name: bullet.subTitle,
-    date: bullet.dates,
-    icon: bullet.sectionIcon.url,
-    iconBg: `${styles.iconBg}`, // customize this based on customer preferences and spefications
-    points: bullet.points.json,
-  })) */
   const experiences = bullets
     .slice() // clone the array to avoid mutating the original
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0)) // sort oldest first (ascending order)
@@ -89,7 +81,7 @@ const Experience = ({ bullets }: { bullets: BulletProps[] }) => {
       points: bullet.points.json,
     }))
   return (
-    <div className='relative'>
+    <div id='roadmap' className='relative'>
       <div className='absolute top-0 z-10 w-full overflow-hidden'>
         <Image
           src='/images/wave.png'
