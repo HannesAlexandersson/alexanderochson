@@ -9,12 +9,7 @@ export const GET_FOOTER = gql`
         }
       }
     }
-    footerTextSectionsCollection(limit: 5, preview: $preview) {
-      items {
-        sectionTitle
-        linkTexts
-      }
-    }
+
     footerPartnerSectionCollection(limit: 5, preview: $preview) {
       items {
         partnerName

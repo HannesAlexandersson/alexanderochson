@@ -51,7 +51,7 @@ const Contact = async () => {
               </TextBlock.Section>
             ))}
         </div>
-        <div className='flex flex-col items-center justify-center'>
+        <div id='form' className='flex flex-col items-center justify-center'>
           <ContactFormProvider classNames='mb-20' />
         </div>
       </main>

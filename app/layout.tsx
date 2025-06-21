@@ -53,6 +53,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: `Created by Alexander&son for ${metaCustomer}`,
     icons: {
       icon: '/favicon.ico',
+      apple: '/apple-icon.png',
     },
     keywords: customerKeyWords,
     metadataBase: new URL(metadataBase),
