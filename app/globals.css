@@ -98,6 +98,22 @@
     @apply mx-auto max-w-[1440px] px-6 md:px-16;
   }
 
+  .wrapperWhite {
+    @apply border-white border-[1px] rounded-[1.5rem] shadow-[wrapperB2Shadow];
+  }
+
+  .wrapperBlack1 {
+    @apply border-black border-[1px] rounded-[1.5rem];
+  }
+
+  .wrapperBlack2 {
+    @apply border-black border-[1px] rounded-[1.5rem] shadow-[wrapperB2Shadow];
+  }
+
+  .wrapperB2Shadow {
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24);
+  }
+
   .transition-all {
     transition-property: all;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function)

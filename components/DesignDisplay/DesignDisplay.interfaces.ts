@@ -1,32 +1,20 @@
-// Type definitions
-export interface Template {
-  id?: string
-  title: string
-  description: string
-  keywords: string[]
-  images: string[]
-  slug: string
-  featured?: boolean
-  category?: string
-  createdAt?: string
-  updatedAt?: string
-}
-
-export interface TemplateCardProps extends Template {
+export interface TemplateCardProps {
   onView?: (slug: string) => void
   onEdit?: (slug: string) => void
   className?: string
-}
-
-export interface TemplateDisplayCardsProps {
-  templates?: Template[]
+  templates?: TemplateDataProps
+  error?: string
   loading?: boolean
-  error?: string | null
-  onView?: (slug: string) => void
-  onEdit?: (slug: string) => void
-  className?: string
 }
-
-export interface FloatingCubeProps {
-  color?: string
+export interface TemplateDataProps {
+  designTitle?: string
+  slug?: string
+  description?: string
+  exampleLink?: string
+  designImagesCollection?: {
+    items: {
+      url: string
+    }[]
+  }
+  keywords?: string[]
 }

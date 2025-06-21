@@ -1,6 +1,7 @@
 import Button from '@/components/Button/Button'
 import CardSlider from '@/components/CardSlider/CardSlider'
 import DesignDisplay from '@/components/DesignDisplay/DesignDisplay'
+import { TemplateDataProps } from '@/components/DesignDisplay/DesignDisplay.interfaces'
 import Menu from '@/components/Navbar/Menu'
 import PageTitle from '@/components/PageTitle/PageTitle'
 import CenterTextBlock from '@/components/TextSections/CenterTextSection'
@@ -8,7 +9,7 @@ import { BlockProps } from '@/components/TextSections/TextSection.types'
 import TextBlock from '@/components/TextSections/TextSections'
 import apolloClient from '@/lib/apolloClient'
 import previewClient from '@/lib/previewClient'
-import { GET_FEATURES } from '@/queries'
+import { GET_DESIGN_TEMPLATES, GET_FEATURES } from '@/queries'
 import { CardSliderData, DataProps } from '@/utils/globalTypes'
 import { ContentfulLivePreview } from '@contentful/live-preview'
 import Typography from '@mui/material/Typography'
@@ -24,6 +25,16 @@ export const metadata = {
 const Features = async () => {
   const { isEnabled } = await draftMode()
   const client = isEnabled ? previewClient : apolloClient
+
+  const { data: designTemplatesData } = await client.query({
+    query: GET_DESIGN_TEMPLATES,
+    variables: {
+      preview: isEnabled,
+    },
+  })
+
+  const designTemplates: TemplateDataProps =
+    designTemplatesData?.designTemplatesCollection?.items || []
 
   const { data } = await client.query({
     query: GET_FEATURES,
@@ -138,7 +149,7 @@ const Features = async () => {
           <Typography
             variant='body1'
             fontFamily='Inria Serif'
-            className='text-primaryText font-inria-sherif mb-12 text-center text-lg md:text-xl lg:text-2xl'
+            className='font-inria-sherif text-secondaryText flex flex-col gap-4 text-center text-xl font-normal'
           >
             Utforska gärna våra olika templates och kolla på våra exempelsidor
             för att hitta den template som passar er bäst! Glöm inte att alla
@@ -152,15 +163,15 @@ const Features = async () => {
           <Typography
             variant='body1'
             fontFamily='Inria Serif'
-            className='text-primaryText font-inria-sherif mb-12 text-center text-lg md:text-xl lg:text-2xl'
+            className='font-inria-sherif text-secondaryText flex flex-col gap-4 text-center text-xl font-normal'
           >
             En annan viktig aspekt är att våra templates är otroligt lätta
-            anpassa så att även om du väljer samma template some någon annan så
+            anpassa så att även om du väljer samma template som någon annan så
             kommer din hemsida, tack vare ditt egna unika content i kombination
             med hur du väljer att individanpassa sidan alltid att se unik ut.
           </Typography>
         </div>
-        <DesignDisplay />
+        <DesignDisplay templatesData={designTemplates} />
       </section>
     </>
   )
