@@ -4,10 +4,8 @@ import LivePreviewProvider from '@/context/LivePreviewProvider'
 import { MenuContextProvider } from '@/context/MenuProvider'
 import apolloClient from '@/lib/apolloClient'
 import previewClient from '@/lib/previewClient'
-import { GET_FOOTER, GET_NAVBAR } from '@/queries'
-import { GET_CUSTOMER } from '@/queries/getCustomerSpecefics'
+import { GET_CUSTOMER, GET_FOOTER, GET_NAVBAR } from '@/queries'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
-import { m } from 'framer-motion'
 import type { Metadata } from 'next'
 import { Bebas_Neue, Inria_Serif, Poppins } from 'next/font/google'
 import { draftMode } from 'next/headers'
@@ -59,7 +57,6 @@ export async function generateMetadata(): Promise<Metadata> {
     creator: 'Alexander&son',
   }
 }
-
 
 export default async function RootLayout({
   children,
