@@ -5,37 +5,14 @@ import { MenuContextProvider } from '@/context/MenuProvider'
 import apolloClient from '@/lib/apolloClient'
 import previewClient from '@/lib/previewClient'
 import { GET_FOOTER, GET_NAVBAR } from '@/queries'
+import { GET_CUSTOMER } from '@/queries/getCustomerSpecefics'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
+import { m } from 'framer-motion'
 import type { Metadata } from 'next'
 import { Bebas_Neue, Inria_Serif, Poppins } from 'next/font/google'
 import { draftMode } from 'next/headers'
 import Script from 'next/script'
 import './globals.css'
-
-//add footer logo to contentful and fetch and send as prop to footer
-
-//impport keywords from contenful
-//placeholder for customer specific keywords
-const customerKeyWords = [
-  'Web Design',
-  'Web Development',
-  'Next.js',
-  'React',
-  'Minimalistic',
-  'Elegance',
-  'Design',
-  'Frontend Development',
-  'UI/UX Design',
-  'Responsive Design',
-  'Modern Web Design',
-  'Performance Optimization',
-  'SEO Optimization',
-  'Accessibility',
-  'Contentful',
-  'Content Management',
-  'Web Applications',
-  'E-commerce Solutions',
-]
 
 const poppins = Poppins({
   variable: '--font-poppins',
@@ -53,21 +30,36 @@ const inriaSerif = Inria_Serif({
   weight: ['300', '400', '700'],
 })
 
-const metadataBase = process.env.NEXT_LOCAL_BASE_URL || 'http://localhost:3000'
-const metaCustomer = process.env.NEXT_PUBLIC_META_CUSTOMER || 'Alexander&son'
-const metaCustomerSpeceficKeywords = customerKeyWords
+export async function generateMetadata(): Promise<Metadata> {
+  const { isEnabled } = await draftMode()
+  const client = isEnabled ? previewClient : apolloClient
 
-export const metadata: Metadata = {
-  title: {
-    template: 'Minimalistic Elegance | %s',
-    default: 'Minimalistic Elegance',
-  },
-  description: `Created by Alexander&son for ${metaCustomer}`,
-  keywords: metaCustomerSpeceficKeywords,
-  metadataBase: metadataBase ? new URL(metadataBase) : undefined,
-  authors: [{ name: 'Alexander&son' }],
-  creator: 'Alexander&son',
+  const { data: metaKeywordsData } = await client.query({
+    query: GET_CUSTOMER,
+    variables: { preview: isEnabled },
+  })
+  const customerKeyWords =
+    metaKeywordsData.metaKeywordsCollection?.items[0]?.keywordsArray || []
+  const metadataBase =
+    process.env.NEXT_LOCAL_BASE_URL ||
+    process.env.NEXT_PUBLIC_URL ||
+    'http://localhost:3000'
+  const metaCustomer =
+    process.env.NEXT_PUBLIC_META_CUSTOMER || 'Alexander&son customer'
+
+  return {
+    title: {
+      template: 'Minimalistic Elegance | %s',
+      default: 'Minimalistic Elegance',
+    },
+    description: `Created by Alexander&son for ${metaCustomer}`,
+    keywords: customerKeyWords,
+    metadataBase: new URL(metadataBase),
+    authors: [{ name: 'Alexander&son' }],
+    creator: 'Alexander&son',
+  }
 }
+
 
 export default async function RootLayout({
   children,
