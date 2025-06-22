@@ -119,7 +119,7 @@ const Features = async () => {
             />
             <div className='flex items-center justify-center'>
               <Button variant='primary' size='sm' className='rounded-lg'>
-                <Link href='/contact'>Boka nu</Link>
+                <Link href='/contact#form'>Boka nu</Link>
               </Button>
             </div>
           </>
