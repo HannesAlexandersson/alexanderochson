@@ -1,3 +1,4 @@
+import { PageProps } from '@/.next/types/app/page'
 import Menu from '@/components/Navbar/Menu'
 import PageTitle from '@/components/PageTitle/PageTitle'
 import Typography from '@/components/Typography/Typography'
@@ -5,12 +6,11 @@ import apolloClient from '@/lib/apolloClient'
 import previewClient from '@/lib/previewClient'
 import { gql } from '@apollo/client'
 import { draftMode } from 'next/headers'
+import { Metadata } from 'next/types'
 
-export const generateMetadata = async ({
+export async function generateMetadata({
   params,
-}: {
-  params: { slug: string }
-}) => {
+}: PageProps): Promise<Metadata> {
   const { slug } = await params
 
   let template = slug?.split('-').join(' ')
@@ -43,10 +43,10 @@ const GET_TEMPLATE_DATA = gql`
   }
 `
 
-const Template = async ({ params }: { params: { slug: string } }) => {
+const Template = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params
   const { isEnabled } = await draftMode()
   const client = isEnabled ? previewClient : apolloClient
-  const { slug } = await params
 
   const { data } = await client.query({
     query: GET_TEMPLATE_DATA,
