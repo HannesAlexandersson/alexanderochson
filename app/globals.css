@@ -75,28 +75,6 @@
   background-blend-mode: exclusion;
 }
 
-/* @utility frostedCard {
-  --border-width: 1px;
-  border-radius: 1rem;
-  position: relative;
-
-  background: hsl(from var(--yt-frosted-glass-desktop) h s l / 0.2);
-  backdrop-filter: blur(10px);
-}
-
-@utility frostedCard::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  border-radius: inherit;
-  border: var(--border-width) solid transparent;
-  background: linear-gradient(var(--border-1), var(--border-2));
-  mask: linear-gradient(black 0 0) border-box,
-    linear-gradient(black 0 0) padding-box;
-  mask-composite: subtract;
-} */
-
 
 @layer components {
 
@@ -118,6 +96,22 @@
 
   .section-contain {
     @apply mx-auto max-w-[1440px] px-6 md:px-16;
+  }
+
+  .wrapperWhite {
+    @apply border-white border-[1px] rounded-[1.5rem] shadow-[wrapperB2Shadow];
+  }
+
+  .wrapperBlack1 {
+    @apply border-black border-[1px] rounded-[1.5rem];
+  }
+
+  .wrapperBlack2 {
+    @apply border-black border-[1px] rounded-[1.5rem] shadow-[wrapperB2Shadow];
+  }
+
+  .wrapperB2Shadow {
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24);
   }
 
   .transition-all {
@@ -163,6 +157,18 @@
     mask: linear-gradient(black, black) border-box,
       linear-gradient(black, black) padding-box;
     mask-composite: subtract;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
   }
 }
 

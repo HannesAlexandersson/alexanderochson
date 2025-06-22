@@ -21,7 +21,12 @@ const CardSlider = ({ cardData, ...classNames }: CardSliderProps) => {
   }
 
   return (
-    <div className={cn(`relative w-full overflow-x-hidden`, classNames)}>
+    <div
+      className={cn(
+        `relative mb-8 w-full overflow-x-hidden md:mb-10 lg:mb-12`,
+        classNames,
+      )}
+    >
       {/* Arrow Buttons */}
       <button
         onClick={() => scroll('left')}
