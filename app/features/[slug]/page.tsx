@@ -43,10 +43,10 @@ const GET_TEMPLATE_DATA = gql`
   }
 `
 
-const Template = async ({ params }: { params: { slug: string } }) => {
+const Template = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params
   const { isEnabled } = await draftMode()
   const client = isEnabled ? previewClient : apolloClient
-  const { slug } = params
 
   const { data } = await client.query({
     query: GET_TEMPLATE_DATA,
