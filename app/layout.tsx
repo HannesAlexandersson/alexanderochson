@@ -47,8 +47,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: {
-      template: 'Minimalistic Elegance | %s',
-      default: 'Minimalistic Elegance',
+      template: 'Alexander&Son | %s',
+      default: 'AlexanderochSon',
     },
     description: `Created by Alexander&son for ${metaCustomer}`,
     icons: {
