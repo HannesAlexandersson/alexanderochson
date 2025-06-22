@@ -249,7 +249,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
         {/* Description */}
         <motion.p
           layout
-          className='text-secondaryText font-inria-sherif mb-4 text-sm leading-relaxed'
+          className='text-secondaryText font-inria-sherif mb-4 line-clamp-7 text-sm leading-relaxed'
         >
           {templates?.description}
         </motion.p>
