@@ -9,7 +9,7 @@ import { draftMode } from 'next/headers'
 export const generateMetadata = async ({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: { slug: string }
 }) => {
   const { slug } = await params
 
