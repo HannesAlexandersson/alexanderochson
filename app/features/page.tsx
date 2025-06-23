@@ -142,34 +142,37 @@ const Features = async () => {
           <Typography
             variant='h2'
             fontFamily='Poppins'
-            className='text-primaryText font-poppins mb-6 text-center text-3xl font-bold md:text-4xl lg:text-5xl'
+            className='text-primaryText font-poppins mb-6 text-left text-3xl font-bold md:text-center md:text-4xl lg:text-5xl'
           >
             Vilken design passar dig?
           </Typography>
-          <Typography
-            variant='body1'
-            fontFamily='Inria Serif'
-            className='font-inria-sherif text-secondaryText flex flex-col gap-4 text-center text-xl font-normal'
-          >
-            Utforska gärna våra olika templates och kolla på våra exempelsidor
-            för att hitta den template som passar er bäst! Glöm inte att alla
-            våra templates är även byggda med SEO i åtanke, vilket innebär att
-            du kan vara säker på att din hemsida kommer att rankas så högt som
-            möjligt på sökmotorer som Google. Våra hemsidor är även byggda med
-            prestanda och accessabilitet i åtanke, vilket innebär att de kommer
-            att var tillgängliga och ladda snabbt och bra på alla enheter.
-            Självklart är alla våra templates responsiva!
-          </Typography>
-          <Typography
-            variant='body1'
-            fontFamily='Inria Serif'
-            className='font-inria-sherif text-secondaryText flex flex-col gap-4 text-center text-xl font-normal'
-          >
-            En annan viktig aspekt är att våra templates är otroligt lätta
-            anpassa så att även om du väljer samma template som någon annan så
-            kommer din hemsida, tack vare ditt egna unika content i kombination
-            med hur du väljer att individanpassa sidan alltid att se unik ut.
-          </Typography>
+          <div className='flex flex-col items-center justify-center gap-4'>
+            <Typography
+              variant='body1'
+              fontFamily='Inria Serif'
+              className='font-inria-sherif text-secondaryText flex flex-col gap-4 text-left text-xl font-normal md:text-center'
+            >
+              Utforska gärna våra olika templates och kolla på våra exempelsidor
+              för att hitta den template som passar er bäst! Glöm inte att alla
+              våra templates är även byggda med SEO i åtanke, vilket innebär att
+              du kan vara säker på att din hemsida kommer att rankas så högt som
+              möjligt på sökmotorer som Google. Våra hemsidor är även byggda med
+              prestanda och accessabilitet i åtanke, vilket innebär att de
+              kommer att var tillgängliga och ladda snabbt och bra på alla
+              enheter. Självklart är alla våra templates responsiva!
+            </Typography>
+            <Typography
+              variant='body1'
+              fontFamily='Inria Serif'
+              className='font-inria-sherif text-secondaryText flex flex-col gap-4 text-left text-xl font-normal md:text-center'
+            >
+              En annan viktig aspekt är att våra templates är otroligt lätta
+              anpassa så att även om du väljer samma template som någon annan så
+              kommer din hemsida, tack vare ditt egna unika content i
+              kombination med hur du väljer att individanpassa sidan alltid att
+              se unik ut.
+            </Typography>
+          </div>
         </div>
         <DesignDisplay templatesData={designTemplates} />
       </section>
