@@ -9,6 +9,9 @@ import { CardSliderProps } from './CardSlider.types'
 
 const CardSlider = ({ cardData, ...classNames }: CardSliderProps) => {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const isDragging = useRef(false)
+  const startX = useRef(0)
+  const scrollLeft = useRef(0)
 
   const scroll = (direction: 'left' | 'right') => {
     if (!scrollRef.current) return
@@ -18,6 +21,27 @@ const CardSlider = ({ cardData, ...classNames }: CardSliderProps) => {
       left: scrollLeft + scrollAmount,
       behavior: 'smooth',
     })
+  }
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    if (!scrollRef.current) return
+    isDragging.current = true
+    scrollRef.current.classList.add('cursor-grabbing')
+    startX.current = e.pageX - scrollRef.current.offsetLeft
+    scrollLeft.current = scrollRef.current.scrollLeft
+  }
+
+  const onMouseLeaveOrUp = () => {
+    isDragging.current = false
+    scrollRef.current?.classList.remove('cursor-grabbing')
+  }
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current || !scrollRef.current) return
+    e.preventDefault()
+    const x = e.pageX - scrollRef.current.offsetLeft
+    const walk = (x - startX.current) * 1 // drag speed
+    scrollRef.current.scrollLeft = scrollLeft.current - walk
   }
 
   return (
@@ -44,7 +68,11 @@ const CardSlider = ({ cardData, ...classNames }: CardSliderProps) => {
       {/* Scrollable Card Track */}
       <motion.div
         ref={scrollRef}
-        className='no-scrollbar flex w-full items-center gap-4 overflow-x-auto px-10 py-18 md:py-22'
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseLeaveOrUp}
+        onMouseLeave={onMouseLeaveOrUp}
+        onMouseMove={onMouseMove}
+        className='no-scrollbar flex w-full cursor-grabbing items-center gap-4 overflow-x-auto px-10 py-18 select-none md:py-22'
         whileTap={{ cursor: 'grabbing' }}
       >
         {cardData.map(card => (

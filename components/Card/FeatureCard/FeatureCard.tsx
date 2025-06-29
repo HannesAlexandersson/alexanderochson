@@ -23,7 +23,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   return (
     <Tilt
       className={cn(
-        `bg-secondaryBg flex min-h-[300px] w-[80vw] max-w-[350px] shrink-0 flex-col items-center justify-center rounded-4xl border-none shadow-2xl`,
+        `bg-secondaryBg flex min-h-[550px] w-[80vw] max-w-[350px] shrink-0 flex-col items-center justify-center rounded-4xl border-none shadow-2xl`,
         className,
         { props },
       )}
